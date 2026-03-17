@@ -1,3 +1,18 @@
 spring:
   application:
     name: food-flow
+  datasource:
+    url: jdbc:postgresql://localhost:5432/food_flow
+    username: postgres
+    password: admin1234
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      # use 'update' para que cree las tablas automáticamente si no existen
+      # use 'none' si ya corriste tu script SQL manualmente y no querés que Spring toque la estructura
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
