@@ -9,10 +9,19 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      # use 'update' para que cree las tablas automáticamente si no existen
-      # use 'none' si ya corriste tu script SQL manualmente y no querés que Spring toque la estructura
       ddl-auto: none
     show-sql: true
     properties:
       hibernate:
         format_sql: true
+
+minio:
+  endpoint: http://localhost:9000
+  access-key: admin
+  secret-key: password123
+  bucket-name: food-flow
+  expiry-hours: 24
+
+server:
+  address: 0.0.0.0
+  port: 8080

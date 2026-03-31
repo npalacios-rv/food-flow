@@ -1,24 +1,28 @@
 package com.npalacios.food_flow.modules.orders.controllers;
 
-import com.npalacios.food_flow.modules.orders.entities.Pedido;
-import com.npalacios.food_flow.modules.orders.services.PedidoService;
+import com.npalacios.food_flow.modules.dto.StandardResponse;
+import com.npalacios.food_flow.modules.orders.dto.OrderDto;
+import com.npalacios.food_flow.modules.orders.services.GestionPedidoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import java.util.List;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/orders/pedidos")
 @RequiredArgsConstructor
 public class PedidoController {
 
-    @Autowired
-    private final PedidoService service;
+    private final GestionPedidoService gestionPedidoService;
 
     @GetMapping
-    public List<Pedido> getAll() {
-        return service.findAll();
+    public ResponseEntity<StandardResponse> getAll() {
+        return ResponseEntity.ok(gestionPedidoService.getAllPedidos());
+    }
+
+    @PostMapping
+    public ResponseEntity<StandardResponse> createOrder(@Valid @RequestBody OrderDto orderDto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(gestionPedidoService.createOrder(orderDto));
     }
 }

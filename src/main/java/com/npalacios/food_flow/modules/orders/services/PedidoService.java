@@ -14,7 +14,8 @@ public class PedidoService {
     private final PedidoRepository repository;
 
     public Pedido save(Pedido entity) {
-        return repository.save(entity);
+        entity = repository.save(entity);
+        return entity;
     }
 
     public List<Pedido> findAll() {
